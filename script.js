@@ -8,6 +8,7 @@ var answer3El = document.querySelector("#answer3")
 var answer4El = document.querySelector("#answer4")
 var buttonsEl = document.querySelector(".button")
 var answerEl = document.querySelector("#response")
+var endEl = document.querySelector("#end")
 
 //Questionaire
 var codingPool = {
@@ -16,7 +17,7 @@ var codingPool = {
       "questions": "Question 1 here",
       "sel": [
         "1)answer 1a",
-        "2)answer 2a",
+        "2)answer 2a (C)",
         "3)answer 3a",
         "4)answer 4a"
       ],
@@ -26,7 +27,7 @@ var codingPool = {
       "questions": "Question 2 here",
       "sel": [
       "1) 2a",
-      "2) 2b",
+      "2) 2b (C)",
       "3) 2c",
       "4) 2d"
       ],
@@ -38,7 +39,7 @@ var codingPool = {
       "1) answer 1c",
       "2) answer 2c",
       "3) answer 3c",
-      "4) answer 4c"
+      "4) answer 4c (C)"
       ],
       "answer": "4"
     }
@@ -50,6 +51,7 @@ var quizTimer = 30
 var questionPull= 0
 var userAnswer = ""
 var totalQ = codingPool.codingQuest.length
+var answertime = 2
 
 headerEl.textContent = "Welcome to the code quiz!"
 answer1El.setAttribute("style", "visibility: hidden");
@@ -57,28 +59,25 @@ answer2El.setAttribute("style", "visibility: hidden");
 answer3El.setAttribute("style", "visibility: hidden");
 answer4El.setAttribute("style", "visibility: hidden");
 
-console.log(codingPool.codingQuest[0].questions)
-console.log(codingPool.codingQuest[0].sel[0])
-console.log(codingPool.codingQuest[0].sel[1])
-console.log(codingPool.codingQuest[0].sel[2])
-console.log(codingPool.codingQuest[0].sel[3])
-console.log(codingPool.codingQuest.length)
-console.log(codingPool.codingQuest[0].answer)
-
-
 function visibility(){
   startBut.setAttribute("style", "visibility: hidden");
   answer1El.setAttribute("style", "visibility: visible");
   answer2El.setAttribute("style", "visibility: visible");
   answer3El.setAttribute("style", "visibility: visible");
   answer4El.setAttribute("style", "visibility: visible");
-  headerEl.textContent = ""
+}
+
+
+function hidden(){
+  answer1El.setAttribute("style", "visibility: hidden");
+  answer2El.setAttribute("style", "visibility: hidden");
+  answer3El.setAttribute("style", "visibility: hidden");
+  answer4El.setAttribute("style", "visibility: hidden");
+  questionEl.textContent =""
 }
 
 function questionSelect(qNum){
-    console.log(qNum)
     var qPull = codingPool.codingQuest[qNum]
-    console.log(qPull)
     questionEl.textContent = qPull.questions;
     answer1El.textContent = qPull.sel[0];
     answer2El.textContent = qPull.sel[1];
@@ -88,16 +87,14 @@ function questionSelect(qNum){
 
 function input(a){
     var qPull = codingPool.codingQuest[questionPull].answer
-    console.log(qPull)
     if(qPull === a){
-        answerEl.textContent = "Correct Answer!"
-        return questionPull++;
+      answerEl.textContent = "Your last answer is right"
+      return questionPull++;
     }
     else{
-        answerEl.textContent = "Wrong Answer!"
-        return questionPull++;
+      answerEl.textContent = "Your last answer is wrong"
+      return questionPull++;
     }
-    
 }
 
 
@@ -107,11 +104,16 @@ function quizStart() {
       headerEl.textContent = quizTimer + " is how much time left in the quiz";
       visibility()
       if(questionPull < totalQ){
-          questionSelect(questionPull)
+        questionSelect(questionPull)
+      }
+      else{
+        hidden()
+        clearInterval(timerInterval);
+        headerEl.textContent = "You finished the quiz!"
       }
       if(quizTimer === 0) {
         clearInterval(timerInterval);
-        headerEl.textContent = "Quiz is done!"
+        headerEl.textContent = "Time's up!"
       }
     }, 1000);
   }
