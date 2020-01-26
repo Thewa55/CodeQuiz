@@ -9,18 +9,7 @@ var answer4El = document.querySelector("#answer4")
 var buttonsEl = document.querySelector(".button")
 var answerEl = document.querySelector("#response")
 
-//Variables
-var quizTimer = 30
-var  questionPull= 0
-var userAnswer = ""
-
-
-headerEl.textContent = "Welcome to the code quiz!"
-answer1El.setAttribute("style", "visibility: hidden");
-answer2El.setAttribute("style", "visibility: hidden");
-answer3El.setAttribute("style", "visibility: hidden");
-answer4El.setAttribute("style", "visibility: hidden");
-
+//Questionaire
 var codingPool = {
   "codingQuest": [
     {
@@ -36,25 +25,38 @@ var codingPool = {
     {
       "questions": "Question 2 here",
       "sel": [
-        "1) 2a",
-        "2) 2b",
-        "3) 2c",
-        "4) 2d"
-        ],
+      "1) 2a",
+      "2) 2b",
+      "3) 2c",
+      "4) 2d"
+      ],
       "answer": "2"
-    },
+      },
     {
       "questions": "Question 3 here",
       "sel": [
-        "1) answer 1c",
-        "2) answer 2c",
-        "3) answer 3c",
-        "4) answer 4c"
-        ],
+      "1) answer 1c",
+      "2) answer 2c",
+      "3) answer 3c",
+      "4) answer 4c"
+      ],
       "answer": "4"
-      }
+    }
   ]
 }
+
+//Variables
+var quizTimer = 30
+var questionPull= 0
+var userAnswer = ""
+var totalQ = codingPool.codingQuest.length
+
+headerEl.textContent = "Welcome to the code quiz!"
+answer1El.setAttribute("style", "visibility: hidden");
+answer2El.setAttribute("style", "visibility: hidden");
+answer3El.setAttribute("style", "visibility: hidden");
+answer4El.setAttribute("style", "visibility: hidden");
+
 console.log(codingPool.codingQuest[0].questions)
 console.log(codingPool.codingQuest[0].sel[0])
 console.log(codingPool.codingQuest[0].sel[1])
@@ -73,60 +75,10 @@ function visibility(){
   headerEl.textContent = ""
 }
 
-// function answerCheck1(i){
-//     if (answer1El.textContent === codingPool.codingQuest[i].answer){
-//         scoreEl.textContent = "You're right!"
-//         i++
-//         return i
-//     }
-//     else{
-//         scoreEl.textContent = "You're wrong!"
-//         i++
-//         return i
-//     }
-// }
-
-// function answerCheck2(i){
-//     if (answer1El.textContent === codingPool.codingQuest[i].answer){
-//         scoreEl.textContent = "You're right!"
-//         i++
-//         return i
-//     }
-//     else{
-//         scoreEl.textContent = "You're wrong!"
-//         i++
-//         return i
-//     }
-// }
-
-// function answerCheck3(i){
-//     if (answer1El.textContent === codingPool.codingQuest[i].answer){
-//         scoreEl.textContent = "You're right!"
-//         i++
-//         return i
-//     }
-//     else{
-//         scoreEl.textContent = "You're wrong!"
-//         i++
-//         return i
-//     }
-// }
-
-// function answerCheck3(i){
-//     if (answer1El.textContent === codingPool.codingQuest[i].answer){
-//         scoreEl.textContent = "You're right!"
-//         i++
-//         return i
-//     }
-//     else{
-//         scoreEl.textContent = "You're wrong!"
-//         i++
-//         return i
-//     }
-// }
-
-function questionSelect(){
-    var qPull = codingPool.codingQuest[questionPull]
+function questionSelect(qNum){
+    console.log(qNum)
+    var qPull = codingPool.codingQuest[qNum]
+    console.log(qPull)
     questionEl.textContent = qPull.questions;
     answer1El.textContent = qPull.sel[0];
     answer2El.textContent = qPull.sel[1];
@@ -139,75 +91,14 @@ function input(a){
     console.log(qPull)
     if(qPull === a){
         answerEl.textContent = "Correct Answer!"
+        return questionPull++;
     }
     else{
         answerEl.textContent = "Wrong Answer!"
+        return questionPull++;
     }
     
 }
-// function questionLoop(){
-//   console.log(i)
-//   i++
-//   if (i < codingPool.codingQuest.length )
-
-//   var varAnswer = codingPool.codingQuest[i].answer
-//   console.log(varAnswer)
-//   answer1El.addEventListener("click", function(){
-//     if (answer1El.textContent === varAnswer){
-//         scoreEl.textContent = "You're right!"
-//         return i
-//     }
-//     else{
-//         scoreEl.textContent = "You're wrong!"
-//         return i
-//     }
-// })
-//   answer2El.addEventListener("click",  function(){
-//     if (answer2El.textContent === varAnswer){
-//         scoreEl.textContent = "You're right!"
-//         return i
-//     }
-//     else{
-//         scoreEl.textContent = "You're wrong!"
-//         return i
-//     }
-// })
-//   answer3El.addEventListener("click",  function(){
-//     if (answer3El.textContent === varAnswer){
-//         scoreEl.textContent = "You're right!"
-//     }
-//     else{
-//         scoreEl.textContent = "You're wrong!"
-    
-//     }
-// })
-//   answer4El.addEventListener("click",  function(){
-//     if (answer4El.textContent === codingPool.codingQuest[i].answer){
-//         scoreEl.textContent = "You're right!"
-//     }
-//     else{
-//         scoreEl.textContent = "You're wrong!"
-//     }
-// })
-// }
-
-//   for(i = 0; i < codingPool.codingQuest.length; i++){
-//     userAnswer = ""
-//     questionEl.innerText = codingPool.codingQuest[i].questions;
-//     answer1El.textContent = codingPool.codingQuest[i].sel[0];
-//     answer2El.textContent = codingPool.codingQuest[i].sel[1];
-//     answer3El.textContent = codingPool.codingQuest[i].sel[2];
-//     answer4El.textContent = codingPool.codingQuest[i].sel[3];
-//     var realAnswer = codingPool.codingQuest[i].answer;
-//     while (userAnswer = ""){
-//       answer1El.addEventListener("click", answerCheck1(i, userAnswer));
-//       answer2El.addEventListener("click", answerCheck2(i, userAnswer));
-//       answer3El.addEventListener("click", answerCheck3(i, userAnswer));
-//       answer4El.addEventListener("click", answerCheck4(i, userAnswer));
-//     }
-//   }
-// }
-
 
 
 function quizStart() {
@@ -215,8 +106,8 @@ function quizStart() {
       quizTimer--;
       headerEl.textContent = quizTimer + " is how much time left in the quiz";
       visibility()
-      if(quizTimer> 0){
-          questionSelect()
+      if(questionPull < totalQ){
+          questionSelect(questionPull)
       }
       if(quizTimer === 0) {
         clearInterval(timerInterval);
