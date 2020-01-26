@@ -7,7 +7,7 @@ var answer2El = document.querySelector("#answer2")
 var answer3El = document.querySelector("#answer3")
 var answer4El = document.querySelector("#answer4")
 var buttonsEl = document.querySelector(".button")
-var scoreEl = document.querySelector("#score")
+var answerEl = document.querySelector("#response")
 
 //Variables
 var quizTimer = 30
@@ -26,32 +26,32 @@ var codingPool = {
     {
       "questions": "Question 1 here",
       "sel": [
-        "answer 1a",
-        "answer 2a",
-        "answer 3a",
-        "answer 4a"
+        "1)answer 1a",
+        "2)answer 2a",
+        "3)answer 3a",
+        "4)answer 4a"
       ],
-      "answer": "answer 1a"
+      "answer": "2"
     },
     {
       "questions": "Question 2 here",
       "sel": [
-        "2a",
-        "2b",
-        "2c",
-        "2d"
+        "1) 2a",
+        "2) 2b",
+        "3) 2c",
+        "4) 2d"
         ],
-      "answer": "2b"
+      "answer": "2"
     },
     {
       "questions": "Question 3 here",
       "sel": [
-        "answer 1c",
-        "answer 2c",
-        "answer 3c",
-        "answer 4c"
+        "1) answer 1c",
+        "2) answer 2c",
+        "3) answer 3c",
+        "4) answer 4c"
         ],
-      "answer": "answer 3c"
+      "answer": "4"
       }
   ]
 }
@@ -126,7 +126,7 @@ function visibility(){
 // }
 
 function questionSelect(){
-    let qPull = codingPool.codingQuest[questionPull]
+    var qPull = codingPool.codingQuest[questionPull]
     questionEl.textContent = qPull.questions;
     answer1El.textContent = qPull.sel[0];
     answer2El.textContent = qPull.sel[1];
@@ -134,7 +134,17 @@ function questionSelect(){
     answer4El.textContent = qPull.sel[3];
 }
 
-
+function input(a){
+    var qPull = codingPool.codingQuest[questionPull].answer
+    console.log(qPull)
+    if(qPull === a){
+        answerEl.textContent = "Correct Answer!"
+    }
+    else{
+        answerEl.textContent = "Wrong Answer!"
+    }
+    
+}
 // function questionLoop(){
 //   console.log(i)
 //   i++
@@ -216,3 +226,15 @@ function quizStart() {
   }
 
 startBut.addEventListener("click", quizStart)
+answer1El.addEventListener("click",  function(){
+  input("1")
+})
+answer2El.addEventListener("click",  function(){
+  input("2")
+})
+answer3El.addEventListener("click",  function(){
+  input("3")
+})
+answer4El.addEventListener("click",  function(){
+  input("4")
+})
