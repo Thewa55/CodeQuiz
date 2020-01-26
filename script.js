@@ -67,7 +67,6 @@ function visibility(){
   answer4El.setAttribute("style", "visibility: visible");
 }
 
-
 function hidden(){
   answer1El.setAttribute("style", "visibility: hidden");
   answer2El.setAttribute("style", "visibility: hidden");
