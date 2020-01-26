@@ -9,37 +9,38 @@ var answer4El = document.querySelector("#answer4")
 var buttonsEl = document.querySelector(".button")
 var answerEl = document.querySelector("#response")
 var endEl = document.querySelector("#end")
+var introEl = document.querySelector("#intro")
 
 //Questionaire
 var codingPool = {
   "codingQuest": [
     {
-      "questions": "Question 1 here",
+      "questions": "What does CSS mean?",
       "sel": [
-        "1)answer 1a",
-        "2)answer 2a (C)",
-        "3)answer 3a",
-        "4)answer 4a"
+        "1) Condensed Style Sheets",
+        "2) Cascading Style Sheets",
+        "3) Cookies Style Sheets",
+        "4) Coding Style Sheets"
       ],
       "answer": "2"
     },
     {
-      "questions": "Question 2 here",
+      "questions": "Where do you reference the CSS sheet in the HTML",
       "sel": [
-      "1) 2a",
-      "2) 2b (C)",
-      "3) 2c",
-      "4) 2d"
+      "1) Right after the HTML tag",
+      "2) Inside the head tag",
+      "3) Inside the body tag",
+      "4) Anywhere in the HTML"
       ],
       "answer": "2"
       },
     {
-      "questions": "Question 3 here",
+      "questions": "In this for loop: 'for(i=0, i<6, i++){}', how many times will the loop run?",
       "sel": [
-      "1) answer 1c",
-      "2) answer 2c",
-      "3) answer 3c",
-      "4) answer 4c (C)"
+      "1) 7",
+      "2) 0",
+      "3) 3",
+      "4) 6"
       ],
       "answer": "4"
     }
@@ -52,19 +53,24 @@ var questionPull= 0
 var userAnswer = ""
 var totalQ = codingPool.codingQuest.length
 var answertime = 2
+var rightWrong = "Yes"
 
+
+//Initial parameters
 headerEl.textContent = "Welcome to the code quiz!"
 answer1El.setAttribute("style", "visibility: hidden");
 answer2El.setAttribute("style", "visibility: hidden");
 answer3El.setAttribute("style", "visibility: hidden");
 answer4El.setAttribute("style", "visibility: hidden");
 
+//Functions
 function visibility(){
   startBut.setAttribute("style", "visibility: hidden");
   answer1El.setAttribute("style", "visibility: visible");
   answer2El.setAttribute("style", "visibility: visible");
   answer3El.setAttribute("style", "visibility: visible");
   answer4El.setAttribute("style", "visibility: visible");
+  introEl.setAttribute("style", "visibility: hidden")
 }
 
 function hidden(){
@@ -76,47 +82,51 @@ function hidden(){
 }
 
 function questionSelect(qNum){
-    var qPull = codingPool.codingQuest[qNum]
-    questionEl.textContent = qPull.questions;
-    answer1El.textContent = qPull.sel[0];
-    answer2El.textContent = qPull.sel[1];
-    answer3El.textContent = qPull.sel[2];
-    answer4El.textContent = qPull.sel[3];
+  var qPull = codingPool.codingQuest[qNum]
+  questionEl.textContent = qPull.questions;
+  answer1El.textContent = qPull.sel[0];
+  answer2El.textContent = qPull.sel[1];
+  answer3El.textContent = qPull.sel[2];
+  answer4El.textContent = qPull.sel[3];
 }
 
 function input(a){
-    var qPull = codingPool.codingQuest[questionPull].answer
-    if(qPull === a){
-      answerEl.textContent = "Your last answer is right"
-      return questionPull++;
-    }
-    else{
-      answerEl.textContent = "Your last answer is wrong"
-      return questionPull++;
-    }
+  var qPull = codingPool.codingQuest[questionPull].answer
+  if(qPull === a){
+    answerEl.textContent = "Your answer is right"
+    return questionPull++;
+  }
+  else{
+    answerEl.textContent = "Your answer is wrong"
+    return questionPull++;
+  }
 }
-
 
 function quizStart() {
   var timerInterval = setInterval(function() {
-      quizTimer--;
-      headerEl.textContent = quizTimer + " is how much time left in the quiz";
-      visibility()
-      if(questionPull < totalQ){
-        questionSelect(questionPull)
-      }
-      else{
-        hidden()
-        clearInterval(timerInterval);
-        headerEl.textContent = "You finished the quiz!"
-      }
-      if(quizTimer === 0) {
-        clearInterval(timerInterval);
-        headerEl.textContent = "Time's up!"
-      }
-    }, 1000);
-  }
+    quizTimer--;
+    headerEl.textContent = quizTimer + " is how much time left in the quiz";
+    visibility()
+    if(questionPull < totalQ){
+      questionSelect(questionPull)
+      setTimeout(function(){ answerEl.textContent === ""; }, 1000)        
+    }
+    else{
+      clearInterval(timerInterval);
+      var finalScore = quizTimer
+      hidden()
+      headerEl.textContent = "You finished the quiz! Your final score is " + finalScore
+    }
+    if(quizTimer === 0) {
+      hidden()
+      clearInterval(timerInterval);
+      headerEl.textContent = "Time's up!"
+    }
+  }, 1000);
+}
 
+
+//events
 startBut.addEventListener("click", quizStart)
 answer1El.addEventListener("click",  function(){
   input("1")
