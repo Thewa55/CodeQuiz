@@ -11,11 +11,12 @@ var answerEl = document.querySelector("#response")
 var endEl = document.querySelector("#end")
 var introEl = document.querySelector("#intro")
 
+
 //Questionaire
 var codingPool = {
   "codingQuest": [
     {
-      "questions": "What does CSS mean?",
+      "questions": "1) What does CSS mean?",
       "sel": [
         "1) Condensed Style Sheets",
         "2) Cascading Style Sheets",
@@ -25,7 +26,7 @@ var codingPool = {
       "answer": "2"
     },
     {
-      "questions": "Where do you reference the CSS sheet in the HTML",
+      "questions": "2) Where do you reference the CSS sheet in the HTML",
       "sel": [
       "1) Right after the HTML tag",
       "2) Inside the head tag",
@@ -35,7 +36,7 @@ var codingPool = {
       "answer": "2"
       },
     {
-      "questions": "In this for loop: 'for(i=0, i<6, i++){}', how many times will the loop run?",
+      "questions": "3) In this for loop: 'for(i=0, i<6, i++){}', how many times will the loop run?",
       "sel": [
       "1) 7",
       "2) 0",
@@ -45,7 +46,7 @@ var codingPool = {
       "answer": "4"
     },
     {
-      "questions": "What would x be if you add this together? x = '2' + 22 + '4'",
+      "questions": "4) What would x be if you add this together? x = '2' + 22 + '4'",
       "sel": [
         "1) 2224",
         "2) 28",
@@ -54,16 +55,46 @@ var codingPool = {
       ],
       "answer": "3"
     },
+    {
+      "questions": "5) 'for' and  'while' are examples of what in Javascript?",
+      "sel": [
+        "1) Loops",
+        "2) Syntax",
+        "3) Functions",
+        "4) None of the above"
+      ],
+      "answer": "1"
+    },
+    {
+      "questions": "6) Where can you edit HTML styling?",
+      "sel": [
+        "1) Javascript",
+        "2) HTML",
+        "3) CSS",
+        "4) All of the above"
+      ],
+      "answer": "4"
+    },
+    {
+      "questions": "7) When you are referencing something in CSS with a '#', what attribute is it?",
+      "sel": [
+        "1) Syntax",
+        "2) Class",
+        "3) ID",
+        "4) Hashtag"
+      ],
+      "answer": "3"
+    },
   ]
 }
 
+
 //Variables
-var quizTimer = 30
+var quizTimer = 40
 var questionPull= 0
 var userAnswer = ""
 var totalQ = codingPool.codingQuest.length
-var answertime = 2
-var rightWrong = 0
+
 
 //Initial parameters
 headerEl.textContent = "Welcome to the code quiz!"
@@ -71,6 +102,7 @@ answer1El.setAttribute("style", "visibility: hidden");
 answer2El.setAttribute("style", "visibility: hidden");
 answer3El.setAttribute("style", "visibility: hidden");
 answer4El.setAttribute("style", "visibility: hidden");
+
 
 //Functions
 function visibility(){
@@ -102,14 +134,14 @@ function questionSelect(qNum){
 function input(a){
   var qPull = codingPool.codingQuest[questionPull].answer
   if(qPull === a){
-    answerEl.textContent = "Your answer is right"
-    quizTimer = quizTimer
-    return [questionPull++, quizTimer];
+    answerEl.textContent = "Your answer is right"    
+    setTimeout(function(){ answerEl.textContent = ""; }, 2000)
+    return [questionPull++];
   }
   else{
-    answerEl.textContent = "Your answer is wrong"
-    rightWrong = 1
-    quizTimer = quizTimer - 5
+    answerEl.textContent = "Your answer is wrong"   
+    setTimeout(function(){ answerEl.textContent = ""; }, 2000)
+    quizTimer = quizTimer - 4
     return [questionPull++, quizTimer];
   }
 }
@@ -122,7 +154,6 @@ function quizStart() {
     visibility()
     if(questionPull < totalQ){
       questionSelect(questionPull)
-      setTimeout(function(){ answerEl.textContent === ""; }, 1000)
     }
     else{
       clearInterval(timerInterval);
