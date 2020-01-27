@@ -10,7 +10,7 @@ var buttonsEl = document.querySelector(".button")
 var answerEl = document.querySelector("#response")
 var endEl = document.querySelector("#end")
 var introEl = document.querySelector("#intro")
-
+var quizBox = document.querySelector("#quiz")
 
 //Questionaire
 var codingPool = {
@@ -98,28 +98,17 @@ var totalQ = codingPool.codingQuest.length
 
 //Initial parameters
 headerEl.textContent = "Welcome to the code quiz!"
-answer1El.setAttribute("style", "visibility: hidden");
-answer2El.setAttribute("style", "visibility: hidden");
-answer3El.setAttribute("style", "visibility: hidden");
-answer4El.setAttribute("style", "visibility: hidden");
-questionEl.setAttribute("style", "visibility: hidden")
+quizBox.setAttribute("style", "visibility: hidden");
 
 //Functions
 function visibility(){
   startBut.setAttribute("style", "visibility: hidden");
-  questionEl.setAttribute("style", "visibility: visible")
-  answer1El.setAttribute("style", "visibility: visible");
-  answer2El.setAttribute("style", "visibility: visible");
-  answer3El.setAttribute("style", "visibility: visible");
-  answer4El.setAttribute("style", "visibility: visible");
-  introEl.setAttribute("style", "visibility: hidden")
+  introEl.setAttribute("style", "visibility: hidden");
+  quizBox.setAttribute("style", "visibility: visible");
 }
 
 function hidden(){
-  answer1El.setAttribute("style", "visibility: hidden");
-  answer2El.setAttribute("style", "visibility: hidden");
-  answer3El.setAttribute("style", "visibility: hidden");
-  answer4El.setAttribute("style", "visibility: hidden");
+  quizBox.setAttribute("style", "visibility: hidden");
   questionEl.textContent =""
 }
 
