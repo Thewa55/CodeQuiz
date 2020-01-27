@@ -90,7 +90,7 @@ var codingPool = {
 
 
 //Variables
-var quizTimer = 40
+var quizTimer = 70
 var questionPull= 0
 var userAnswer = ""
 var totalQ = codingPool.codingQuest.length
@@ -102,11 +102,12 @@ answer1El.setAttribute("style", "visibility: hidden");
 answer2El.setAttribute("style", "visibility: hidden");
 answer3El.setAttribute("style", "visibility: hidden");
 answer4El.setAttribute("style", "visibility: hidden");
-
+questionEl.setAttribute("style", "visibility: hidden")
 
 //Functions
 function visibility(){
   startBut.setAttribute("style", "visibility: hidden");
+  questionEl.setAttribute("style", "visibility: visible")
   answer1El.setAttribute("style", "visibility: visible");
   answer2El.setAttribute("style", "visibility: visible");
   answer3El.setAttribute("style", "visibility: visible");
@@ -134,26 +135,31 @@ function questionSelect(qNum){
 function input(a){
   var qPull = codingPool.codingQuest[questionPull].answer
   if(qPull === a){
-    answerEl.textContent = "Your answer is right"    
+    answerEl.textContent = "Your answer is right"
+    questionPull++
     setTimeout(function(){ answerEl.textContent = ""; }, 2000)
-    return [questionPull++];
+    questionSelect(questionPull)
   }
   else{
-    answerEl.textContent = "Your answer is wrong"   
+    answerEl.textContent = "Your answer is wrong"
+    rightWrong = 1
+    quizTimer = quizTimer - 5
+    questionPull++
     setTimeout(function(){ answerEl.textContent = ""; }, 2000)
-    quizTimer = quizTimer - 4
-    return [questionPull++, quizTimer];
+    questionSelect(questionPull)
+    return quizTimer;
   }
 }
 
-function quizStart() {
+
+
+function quizStart() {  
+  questionSelect(questionPull)
   var timerInterval = setInterval(function() {
     quizTimer--;
-    console.log(quizTimer[0])
     headerEl.textContent = quizTimer + " is how much time left in the quiz";
     visibility()
     if(questionPull < totalQ){
-      questionSelect(questionPull)
     }
     else{
       clearInterval(timerInterval);
@@ -161,7 +167,7 @@ function quizStart() {
       hidden()
       headerEl.textContent = "You finished the quiz! Your final score is " + finalScore
     }
-    if(quizTimer === 0) {
+    if(quizTimer <= 0) {
       hidden()
       clearInterval(timerInterval);
       headerEl.textContent = "Time's up!"
