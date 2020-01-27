@@ -43,7 +43,17 @@ var codingPool = {
       "4) 6"
       ],
       "answer": "4"
-    }
+    },
+    {
+      "questions": "What would x be if you add this together? x = '2' + 22 + '4'",
+      "sel": [
+        "1) 2224",
+        "2) 28",
+        "3) '2224'",
+        "4) '6' + 22"
+      ],
+      "answer": "3"
+    },
   ]
 }
 
@@ -53,8 +63,7 @@ var questionPull= 0
 var userAnswer = ""
 var totalQ = codingPool.codingQuest.length
 var answertime = 2
-var rightWrong = "Yes"
-
+var rightWrong = 0
 
 //Initial parameters
 headerEl.textContent = "Welcome to the code quiz!"
@@ -82,7 +91,7 @@ function hidden(){
 }
 
 function questionSelect(qNum){
-  var qPull = codingPool.codingQuest[qNum]
+  var qPull = codingPool.codingQuest[qNum];
   questionEl.textContent = qPull.questions;
   answer1El.textContent = qPull.sel[0];
   answer2El.textContent = qPull.sel[1];
@@ -94,22 +103,26 @@ function input(a){
   var qPull = codingPool.codingQuest[questionPull].answer
   if(qPull === a){
     answerEl.textContent = "Your answer is right"
-    return questionPull++;
+    quizTimer = quizTimer
+    return [questionPull++, quizTimer];
   }
   else{
     answerEl.textContent = "Your answer is wrong"
-    return questionPull++;
+    rightWrong = 1
+    quizTimer = quizTimer - 5
+    return [questionPull++, quizTimer];
   }
 }
 
 function quizStart() {
   var timerInterval = setInterval(function() {
     quizTimer--;
+    console.log(quizTimer[0])
     headerEl.textContent = quizTimer + " is how much time left in the quiz";
     visibility()
     if(questionPull < totalQ){
       questionSelect(questionPull)
-      setTimeout(function(){ answerEl.textContent === ""; }, 1000)        
+      setTimeout(function(){ answerEl.textContent === ""; }, 1000)
     }
     else{
       clearInterval(timerInterval);
