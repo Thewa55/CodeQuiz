@@ -129,7 +129,7 @@ function input(a){
     if(questionPull == totalQ){
       hidden()
     }
-    setTimeout(function(){ answerEl.textContent = ""; }, 2000) 
+    setTimeout(function(){ answerEl.textContent = ""; }, 2000)
     questionSelect(questionPull)
   }
   else{
@@ -150,7 +150,8 @@ function input(a){
 
 function quizStart() {
   questionSelect(questionPull) 
-  visibility()
+  visibility()  
+  headerEl.textContent = quizTimer + " is how much time left in the quiz";
   var timerInterval = setInterval(function() {
     quizTimer--;
     headerEl.textContent = quizTimer + " is how much time left in the quiz";
