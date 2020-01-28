@@ -98,13 +98,13 @@ var totalQ = codingPool.codingQuest.length
 
 //Initial parameters
 headerEl.textContent = "Welcome to the code quiz!"
-quizBox.setAttribute("style", "visibility: hidden");
+quizBox.setAttribute("style", "display: none");
 
 //Functions
 function visibility(){
   startBut.setAttribute("style", "visibility: hidden");
   introEl.setAttribute("style", "visibility: hidden");
-  quizBox.setAttribute("style", "visibility: visible");
+  quizBox.setAttribute("style", "display: block");
 }
 
 function hidden(){
@@ -126,14 +126,20 @@ function input(a){
   if(qPull === a){
     answerEl.textContent = "Your answer is right"
     questionPull++
-    setTimeout(function(){ answerEl.textContent = ""; }, 2000)
+    if(questionPull == totalQ){
+      hidden()
+    }
+    setTimeout(function(){ answerEl.textContent = ""; }, 2000) 
     questionSelect(questionPull)
   }
   else{
     answerEl.textContent = "Your answer is wrong"
     rightWrong = 1
     quizTimer = quizTimer - 5
-    questionPull++
+    questionPull++  
+    if(questionPull == totalQ){
+      hidden()
+    }
     setTimeout(function(){ answerEl.textContent = ""; }, 2000)
     questionSelect(questionPull)
     return quizTimer;
@@ -142,18 +148,17 @@ function input(a){
 
 
 
-function quizStart() {  
-  questionSelect(questionPull)
+function quizStart() {
+  questionSelect(questionPull) 
+  visibility()
   var timerInterval = setInterval(function() {
     quizTimer--;
     headerEl.textContent = quizTimer + " is how much time left in the quiz";
-    visibility()
     if(questionPull < totalQ){
     }
     else{
       clearInterval(timerInterval);
       var finalScore = quizTimer
-      hidden()
       headerEl.textContent = "You finished the quiz! Your final score is " + finalScore
     }
     if(quizTimer <= 0) {
