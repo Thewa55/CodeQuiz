@@ -11,10 +11,12 @@ var answerEl = document.querySelector("#response")
 var endEl = document.querySelector("#end")
 var introEl = document.querySelector("#intro")
 var quizBox = document.querySelector("#quiz")
-var highScore = document.querySelector("#highscore")
+var nameEl = document.querySelector("#nameinput")
 var submitButton = document.querySelector("#submit")
 var nameInput = document.querySelector("#name")
-
+var highScoreEl = document.querySelector("#highscore")
+var names = []
+var highscores = []
 
 //Questionaire
 var codingPool = {
@@ -129,12 +131,23 @@ var questionPull= 0
 var userAnswer = ""
 var totalQ = codingPool.codingQuest.length
 
+initialAttribute()
 
 //Initial parameters
-headerEl.textContent = "Welcome to the code quiz!"
-quizBox.setAttribute("style", "display: none");
-highScore.setAttribute("style", "display: none")
-endEl.setAttribute("style", "display: none")
+function initialAttribute(){
+  var storedNames = JSON.parse(localStorage.getItem("names"))
+  var storedScores = JSON.parse(localStorage.getItem("highscores"))
+  if(storedNames !== null && storedScores !== null){
+    names = storedNames
+    highscores = storedScores
+  }
+  headerEl.textContent = "Welcome to the code quiz!"
+  quizBox.setAttribute("style", "display: none");
+  nameEl.setAttribute("style", "display: none")
+  endEl.setAttribute("style", "display: none")
+  highScoreEl.setAttribute("style", "display: none")
+  startBut.setAttribute("style", "visibility: block")
+}
 
 //Functions
 function visibility(){
@@ -145,9 +158,16 @@ function visibility(){
 
 function hidden(){
   quizBox.setAttribute("style", "visibility: hidden");
-  highScore.setAttribute("style", "display: flex")
+  nameEl.setAttribute("style", "display: flex")
   questionEl.textContent =""
   endEl.setAttribute("style", "display: block")
+}
+
+function showHighscore(){
+  headerEl.setAttribute("style", "display: none")
+  highScoreEl.setAttribute("style", "display: block")
+  nameEl.setAttribute("style", "display: none")
+  endEl.setAttribute("style", "display: none")
 }
 
 function questionSelect(qNum){
@@ -213,14 +233,26 @@ function quizStart() {
   }, 1000);
 }
 
-function scoreBox(){
+function storeNameScore(name, score){
+  console.log(name)
+  console.log(score)
+  localStorage.setItem("names", JSON.stringify(names))
+  localStorage.setItem("highscores", JSON.stringify(highscores))
+}
+
+function scoreBox(event){
   if(nameInput.value == ""){
-    alert("Please enter a name")
+    alert("Please enter a name");
   }
   else{
-    
+    event.preventDefault();
+    var contestantName = nameInput.value.trim();
+    console.log(contestantName);
+    names.push(contestantName)
+    highscores.push(quizTimer)
+    showHighscore();
+    storeNameScore(contestantName, quizTimer);
   }
-
 }
 
 
