@@ -13,6 +13,8 @@ var introEl = document.querySelector("#intro")
 var quizBox = document.querySelector("#quiz")
 var highScore = document.querySelector("#highscore")
 var submitButton = document.querySelector("#submit")
+var nameInput = document.querySelector("#name")
+
 
 //Questionaire
 var codingPool = {
@@ -160,25 +162,30 @@ function questionSelect(qNum){
 function input(a){
   var qPull = codingPool.codingQuest[questionPull].answer
   if(qPull === a){
-    answerEl.textContent = "Your answer is right"
     questionPull++
     if(questionPull == totalQ){
       hidden()
     }
-    setTimeout(function(){ answerEl.textContent = ""; }, 2000)
-    questionSelect(questionPull)
+    else{
+      answerEl.textContent = "Your answer is right"
+      setTimeout(function(){ answerEl.textContent = ""; }, 2000)
+      questionSelect(questionPull)
+    }
   }
   else{
-    answerEl.textContent = "Your answer is wrong"
-    rightWrong = 1
-    quizTimer = quizTimer - 7
     questionPull++  
     if(questionPull == totalQ){
-      hidden()
+      hidden()      
+      quizTimer = quizTimer - 7
+      return quizTimer;
     }
-    setTimeout(function(){ answerEl.textContent = ""; }, 2000)
-    questionSelect(questionPull)
-    return quizTimer;
+    else{
+      answerEl.textContent = "Your answer is wrong"
+      quizTimer = quizTimer - 7
+      setTimeout(function(){ answerEl.textContent = ""; }, 2000)
+      questionSelect(questionPull)
+      return quizTimer;
+    }
   }
 }
 
@@ -204,6 +211,16 @@ function quizStart() {
       headerEl.textContent = "Time's up!"
     }
   }, 1000);
+}
+
+function scoreBox(){
+  if(nameInput.value == ""){
+    alert("Please enter a name")
+  }
+  else{
+    
+  }
+
 }
 
 
