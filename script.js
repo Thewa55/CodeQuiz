@@ -15,6 +15,9 @@ var nameEl = document.querySelector("#nameinput")
 var submitButton = document.querySelector("#submit")
 var nameInput = document.querySelector("#name")
 var highScoreEl = document.querySelector("#highscore")
+var savedScore = document.querySelector(".savedscore")
+var savedName = document.querySelector(".savedname")
+var resetBut = document.querySelector("reset")
 var names = []
 var highscores = []
 
@@ -140,6 +143,7 @@ function initialAttribute(){
   if(storedNames !== null && storedScores !== null){
     names = storedNames
     highscores = storedScores
+    renderHighScore()
   }
   headerEl.textContent = "Welcome to the code quiz!"
   quizBox.setAttribute("style", "display: none");
@@ -179,6 +183,23 @@ function questionSelect(qNum){
   answer4El.textContent = qPull.sel[3];
 }
 
+function renderHighScore(){
+  savedName.innerHTML = ""
+  savedScore.innerHTML = ""
+  for (var i = 0; i < names.length; i++) {
+    var localNames = names[i];
+    var li = document.createElement("li");
+    li.textContent = localNames;
+    savedName.appendChild(li)
+
+    var localScores = highscores[i];
+    var div = document.createElement("div");
+    div.textContent = localScores;
+    savedScore.appendChild(div)
+  }
+}
+
+
 function input(a){
   var qPull = codingPool.codingQuest[questionPull].answer
   if(qPull === a){
@@ -210,7 +231,6 @@ function input(a){
 }
 
 
-
 function quizStart() {
   questionSelect(questionPull) 
   visibility()  
@@ -234,8 +254,6 @@ function quizStart() {
 }
 
 function storeNameScore(name, score){
-  console.log(name)
-  console.log(score)
   localStorage.setItem("names", JSON.stringify(names))
   localStorage.setItem("highscores", JSON.stringify(highscores))
 }
@@ -252,6 +270,7 @@ function scoreBox(event){
     highscores.push(quizTimer)
     showHighscore();
     storeNameScore(contestantName, quizTimer);
+    renderHighScore()
   }
 }
 
@@ -259,6 +278,7 @@ function scoreBox(event){
 //events
 startBut.addEventListener("click", quizStart)
 submitButton.addEventListener("click",scoreBox)
+resetBut.addEventListener("click",resetScore)
 answer1El.addEventListener("click",  function(){
   input("1")
 })
