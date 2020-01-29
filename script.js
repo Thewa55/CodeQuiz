@@ -125,7 +125,7 @@ var codingPool = {
       "sel": [
         "1) var",
         "2) let",
-        "3) cont",
+        "3) const",
         "4) All of the above"
       ],
       "answer": "4"
