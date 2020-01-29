@@ -162,6 +162,7 @@ function initialAttribute(){
 }
 
 //Functions
+//these functions will set up the screen according to what part of the quiz you are on
 function visibility(){
   startBut.setAttribute("style", "visibility: hidden");
   introEl.setAttribute("style", "display: none");
@@ -182,6 +183,7 @@ function showHighscore(){
   endEl.setAttribute("style", "display: none")
 }
 
+//function to reset the local storage and arrays
 function resetScore(){
   localStorage.clear("names");
   localStorage.clear("highscores");
@@ -189,6 +191,7 @@ function resetScore(){
   savedScore.innerHTML = ""
 }
 
+//this function selects which question/selections will be shown
 function questionSelect(qNum){
   var qPull = codingPool.codingQuest[qNum];
   questionEl.textContent = qPull.questions;
@@ -198,6 +201,7 @@ function questionSelect(qNum){
   answer4El.textContent = qPull.sel[3];
 }
 
+//this function renders the score list
 function renderHighScore(){
   savedName.innerHTML = ""
   savedScore.innerHTML = ""
@@ -214,7 +218,7 @@ function renderHighScore(){
   }
 }
 
-
+//this function takes the input of the user and compares it to the correct answer 
 function input(a){
   var qPull = codingPool.codingQuest[questionPull].answer
   if(qPull === a){
@@ -245,7 +249,7 @@ function input(a){
   }
 }
 
-
+//this function starts the quiz
 function quizStart() {
   questionSelect(questionPull) 
   visibility()  
@@ -268,11 +272,15 @@ function quizStart() {
   }, 1000);
 }
 
+//this function saves the name and score to local storage
 function storeNameScore(name, score){
   localStorage.setItem("names", JSON.stringify(names))
   localStorage.setItem("highscores", JSON.stringify(highscores))
 }
 
+//this function occurs after hitting submit, when the user hits submit it will check to see if the text box is empty
+//if the text box contains something, it will trim the name, and push the name and score to an array and local storage
+//the variables are reset for the next replay
 function scoreBox(event){
   if(nameInput.value == ""){
     alert("Please enter a name");
