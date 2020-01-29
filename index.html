@@ -9,37 +9,50 @@
   <title>Document</title>
 </head>
 <body>
-  <main class = "container">
-    <section class = "row">
-      <h1 class = "col text-center" id = "header"> </h1>
-    </section>  
-    <section class = "row">
-      <article class = "col text-center" id = "intro">
+  <main class="container">
+    <section class="row">
+      <h1 class="col text-center" id="header"> </h1>
+    </section> 
+    <section class="row" id="end">
+      <h3 class="col text-center">Please input your name to save your score</h3> 
+    </section> 
+    <section class ="row justify-content-center"  id="intro">
+      <p class="text-center">
         Welcome to my quiz, it will reflect upon your knowledge of coding! Hit the start button to get started
-      </article>
+      </p>
+      <p class="text-center">
+        Your score is based on the time left, you lose 7 seconds for getting a wrong answer.
+      </p>
     </section>
-    <div class = "row">
-      <div class = "col text-center">
-        <button id = "start">
+    <div class="row">
+      <div class="col text-center">
+        <button id="start">
           Start Quiz!
         </button>
       </div>
     </div>
-    <div id = "quiz"> 
-      <div id = "question"></div>
+    <section class ="row justify-content-center" id="highscore">
+      <div class="col-4">
+        <input type="text" class="form-control my-4" placeholder="Your name">
+      </div>
+        <button type="submit" class="btn btn-primary my-4" id="submit">Submit</button>
+    </section>
+    <section class="row" id="quiz"> 
+      <div class="offset-2" id="question"></div>
       <br>
-      <button class="btn btn-primary" id="answer1">Button</button>
+      <button class="btn btn-primary offset-2" id="answer1">Button</button>
       <br>
-      <button class="btn btn-primary" id="answer2">Button</button>
+      <button class="btn btn-primary offset-2" id="answer2">Button</button>
       <br>
-      <button class="btn btn-primary" id="answer3">Button</button>
+      <button class="btn btn-primary offset-2" id="answer3">Button</button>
       <br>
-      <button class="btn btn-primary" id="answer4">Button</button>
+      <button class="btn btn-primary offset-2" id="answer4">Button</button>
       <br>
-      <div id = "end"></div>
-    </div>
-    <div id = "response"></div>
-  </main>
+    </section>
+    <section class="row">
+      <div class="offset-2 my-4" id="response"></div> 
+    </section>
+    </main>
   <script src="./script.js"></script>
 </body>
 </html>

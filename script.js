@@ -11,6 +11,8 @@ var answerEl = document.querySelector("#response")
 var endEl = document.querySelector("#end")
 var introEl = document.querySelector("#intro")
 var quizBox = document.querySelector("#quiz")
+var highScore = document.querySelector("#highscore")
+var submitButton = document.querySelector("#submit")
 
 //Questionaire
 var codingPool = {
@@ -85,6 +87,36 @@ var codingPool = {
       ],
       "answer": "3"
     },
+    {
+      "questions": "8) How would you convert the string = '8' into an integer = 8?",
+      "sel": [
+        "1) parseInt()",
+        "2) parse()",
+        "3) stringify()",
+        "4) It's already an integer",
+      ],
+      "answer": "1"
+    },
+    {
+      "questions": "9) What does JSON stand for?",
+      "sel": [
+        "1) Java Source Object Notes",
+        "2) JavaScript Object Notation",
+        "3) Java Source Object Notation",
+        "4) Javascript Object Notes"
+      ],
+      "answer": "2"
+    },
+    {
+      "questions": "10) How can you label something to be a variable?",
+      "sel": [
+        "1) var",
+        "2) let",
+        "3) cont",
+        "4) All of the above"
+      ],
+      "answer": "4"
+    },
   ]
 }
 
@@ -99,17 +131,21 @@ var totalQ = codingPool.codingQuest.length
 //Initial parameters
 headerEl.textContent = "Welcome to the code quiz!"
 quizBox.setAttribute("style", "display: none");
+highScore.setAttribute("style", "display: none")
+endEl.setAttribute("style", "display: none")
 
 //Functions
 function visibility(){
   startBut.setAttribute("style", "visibility: hidden");
-  introEl.setAttribute("style", "visibility: hidden");
+  introEl.setAttribute("style", "display: none");
   quizBox.setAttribute("style", "display: block");
 }
 
 function hidden(){
   quizBox.setAttribute("style", "visibility: hidden");
+  highScore.setAttribute("style", "display: flex")
   questionEl.textContent =""
+  endEl.setAttribute("style", "display: block")
 }
 
 function questionSelect(qNum){
@@ -135,7 +171,7 @@ function input(a){
   else{
     answerEl.textContent = "Your answer is wrong"
     rightWrong = 1
-    quizTimer = quizTimer - 5
+    quizTimer = quizTimer - 7
     questionPull++  
     if(questionPull == totalQ){
       hidden()
@@ -173,6 +209,7 @@ function quizStart() {
 
 //events
 startBut.addEventListener("click", quizStart)
+submitButton.addEventListener("click",scoreBox)
 answer1El.addEventListener("click",  function(){
   input("1")
 })
