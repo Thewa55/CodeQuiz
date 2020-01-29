@@ -1,23 +1,29 @@
 // ID + Class selector assignments
+//Button assignments
 var startBut = document.querySelector("#start")
-var headerEl = document.querySelector("#header")
-var questionEl = document.querySelector("#question")
 var answer1El = document.querySelector("#answer1")
 var answer2El = document.querySelector("#answer2")
 var answer3El = document.querySelector("#answer3")
 var answer4El = document.querySelector("#answer4")
 var buttonsEl = document.querySelector(".button")
+var submitButton = document.querySelector("#submit")
+var resetBut = document.querySelector("#reset")
+var playAgainBut = document.querySelector("#play")
+
+//Display elements 
+var headerEl = document.querySelector("#header")
+var questionEl = document.querySelector("#question")
 var answerEl = document.querySelector("#response")
 var endEl = document.querySelector("#end")
 var introEl = document.querySelector("#intro")
 var quizBox = document.querySelector("#quiz")
 var nameEl = document.querySelector("#nameinput")
-var submitButton = document.querySelector("#submit")
 var nameInput = document.querySelector("#name")
 var highScoreEl = document.querySelector("#highscore")
 var savedScore = document.querySelector(".savedscore")
 var savedName = document.querySelector(".savedname")
-var resetBut = document.querySelector("reset")
+
+//Empty arrays to hold names and highest scores
 var names = []
 var highscores = []
 
@@ -145,6 +151,8 @@ function initialAttribute(){
     highscores = storedScores
     renderHighScore()
   }
+  headerEl.setAttribute("style", "display: block")
+  introEl.setAttribute("style", "display: block")
   headerEl.textContent = "Welcome to the code quiz!"
   quizBox.setAttribute("style", "display: none");
   nameEl.setAttribute("style", "display: none")
@@ -172,6 +180,13 @@ function showHighscore(){
   highScoreEl.setAttribute("style", "display: block")
   nameEl.setAttribute("style", "display: none")
   endEl.setAttribute("style", "display: none")
+}
+
+function resetScore(){
+  localStorage.clear("names");
+  localStorage.clear("highscores");
+  savedName.innerHTML = ""
+  savedScore.innerHTML = ""
 }
 
 function questionSelect(qNum){
@@ -271,6 +286,10 @@ function scoreBox(event){
     showHighscore();
     storeNameScore(contestantName, quizTimer);
     renderHighScore()
+    quizTimer = 70
+    questionPull= 0
+    userAnswer = ""
+    return [quizTimer, questionPull, userAnswer]
   }
 }
 
@@ -279,6 +298,7 @@ function scoreBox(event){
 startBut.addEventListener("click", quizStart)
 submitButton.addEventListener("click",scoreBox)
 resetBut.addEventListener("click",resetScore)
+playAgainBut.addEventListener("click", initialAttribute)
 answer1El.addEventListener("click",  function(){
   input("1")
 })
