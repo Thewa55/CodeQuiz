@@ -184,6 +184,8 @@ function showHighscore(){
   endEl.setAttribute("style", "display: none")
   introEl.setAttribute("style", "display: none")
   startBut.setAttribute("style", "visibility: hidden")
+  quizBox.setAttribute("style", "display: none")
+  nameEl.setAttribute("style", "display: none")
 }
 
 //function to reset the local storage and arrays
@@ -192,6 +194,8 @@ function resetScore(){
   localStorage.clear("highscores");
   savedName.innerHTML = ""
   savedScore.innerHTML = ""
+  names.splice(0, names.length)
+  highscores.splice(0, highscores.length)
 }
 
 //this function selects which question/selections will be shown
