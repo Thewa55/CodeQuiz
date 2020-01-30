@@ -5,13 +5,13 @@ var answer1El = document.querySelector("#answer1")
 var answer2El = document.querySelector("#answer2")
 var answer3El = document.querySelector("#answer3")
 var answer4El = document.querySelector("#answer4")
-var buttonsEl = document.querySelector(".button")
 var submitButton = document.querySelector("#submit")
 var resetBut = document.querySelector("#reset")
 var playAgainBut = document.querySelector("#play")
 var highScoreBut = document.querySelector("#viewhs")
 
 //Display elements 
+var buttonsEl = document.querySelector(".button")
 var headerEl = document.querySelector("#header")
 var questionEl = document.querySelector("#question")
 var answerEl = document.querySelector("#response")
@@ -44,20 +44,20 @@ var codingPool = {
     {
       "questions": "2) Where do you reference the CSS sheet in the HTML",
       "sel": [
-      "1) Right after the HTML tag",
-      "2) Inside the head tag",
-      "3) Inside the body tag",
-      "4) Anywhere in the HTML"
+        "1) Right after the HTML tag",
+        "2) Inside the head tag",
+        "3) Inside the body tag",
+        "4) Anywhere in the HTML"
       ],
       "answer": "2"
       },
     {
       "questions": "3) In this for loop: 'for(i=0, i<6, i++){}', how many times will the loop run?",
       "sel": [
-      "1) 7",
-      "2) 0",
-      "3) 3",
-      "4) 6"
+        "1) 7",
+        "2) 0",
+        "3) 3",
+        "4) 6"
       ],
       "answer": "4"
     },
@@ -136,7 +136,7 @@ var codingPool = {
 
 
 //Variables
-var quizTimer = 70
+var quizTimer = 100
 var questionPull= 0
 var userAnswer = ""
 var totalQ = codingPool.codingQuest.length
@@ -301,7 +301,7 @@ function scoreBox(event){
     showHighscore();
     storeNameScore(contestantName, quizTimer);
     renderHighScore()
-    quizTimer = 70
+    quizTimer = 100
     questionPull= 0
     userAnswer = ""
     return [quizTimer, questionPull, userAnswer]
