@@ -9,6 +9,7 @@ var buttonsEl = document.querySelector(".button")
 var submitButton = document.querySelector("#submit")
 var resetBut = document.querySelector("#reset")
 var playAgainBut = document.querySelector("#play")
+var highScoreBut = document.querySelector("#viewhs")
 
 //Display elements 
 var headerEl = document.querySelector("#header")
@@ -181,6 +182,8 @@ function showHighscore(){
   highScoreEl.setAttribute("style", "display: block")
   nameEl.setAttribute("style", "display: none")
   endEl.setAttribute("style", "display: none")
+  introEl.setAttribute("style", "display: none")
+  startBut.setAttribute("style", "visibility: hidden")
 }
 
 //function to reset the local storage and arrays
@@ -301,8 +304,13 @@ function scoreBox(event){
   }
 }
 
+function highScoreView(){
+  showHighscore()
+  renderHighScore()
+}
 
 //events
+highScoreBut.addEventListener("click", highScoreView)
 startBut.addEventListener("click", quizStart)
 submitButton.addEventListener("click",scoreBox)
 resetBut.addEventListener("click",resetScore)
